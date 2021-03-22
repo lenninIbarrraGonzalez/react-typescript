@@ -27,19 +27,36 @@ function App(): JSX.Element {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          onChange={(e) => setNewTask(e.target.value)}
-          value={newTask}
-        />
-        <button>Guardar</button>
-      </form>
-      {tasks.map((item: ITask, index: number) => {
-        return <h1 key={index}>{item.name}</h1>;
-      })}
-    </>
+    <div className="container p-4">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <div className="card">
+            <div className="card-body">
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  onChange={(e) => setNewTask(e.target.value)}
+                  value={newTask}
+                  className="form-control"
+                  autoFocus
+                />
+                <button className="btn btn-success btn-block mt-2">
+                  Guardar
+                </button>
+              </form>
+            </div>
+          </div>
+
+          {tasks.map((item: ITask, index: number) => (
+            <div className="card card-body mt-2" key={index}>
+              <h2 style={{ textDecoration: item.done ? "line-through" : "" }}>
+                {item.name}
+              </h2>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
