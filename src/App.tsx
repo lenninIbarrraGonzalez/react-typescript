@@ -36,6 +36,9 @@ function App(): JSX.Element {
         />
         <button>Guardar</button>
       </form>
+      {tasks.map((item: ITask, index: number) => {
+        return <h1 key={index}>{item.name}</h1>;
+      })}
     </>
   );
 }
