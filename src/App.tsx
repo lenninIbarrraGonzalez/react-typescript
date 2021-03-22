@@ -21,11 +21,24 @@ function App(): JSX.Element {
   };
 
   //agregando una nueva tarea
-  const addTask = (name: string) => {
+  const addTask = (name: string): void => {
     const newTasks: ITask[] = [...tasks, { name, done: false }];
     setTasks(newTasks);
   };
 
+  const toogleDoneTask = (index: number): void => {
+    const newTasks: ITask[] = [...tasks];
+    //cambiando el valor del done
+    newTasks[index].done = !newTasks[index].done;
+    setTasks(newTasks);
+  };
+
+  const removeTask = (index: number): void => {
+    // console.log(index);
+    const newTasks: ITask[] = [...tasks];
+    newTasks.splice(index, 1);
+    setTasks(newTasks);
+  };
   return (
     <div className="container p-4">
       <div className="row">
@@ -52,6 +65,20 @@ function App(): JSX.Element {
               <h2 style={{ textDecoration: item.done ? "line-through" : "" }}>
                 {item.name}
               </h2>
+              <div>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => toogleDoneTask(index)}
+                >
+                  {item.done ? "🗸" : "✗"}
+                </button>
+                <button
+                  className="btn btn-danger ml-3"
+                  onClick={() => removeTask(index)}
+                >
+                  🗑
+                </button>
+              </div>
             </div>
           ))}
         </div>
