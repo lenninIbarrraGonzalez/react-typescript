@@ -20,6 +20,7 @@ function App(): JSX.Element {
     setNewTask("");
   };
 
+  //agregando una nueva tarea
   const addTask = (name: string) => {
     const newTasks: ITask[] = [...tasks, { name, done: false }];
     setTasks(newTasks);
