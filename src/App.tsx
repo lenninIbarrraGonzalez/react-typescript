@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 //Creamos un type para hacer mas corto el llamado e:FormElement
 type FormElement = React.FormEvent<HTMLFormElement>;
@@ -12,12 +12,14 @@ interface ITask {
 function App(): JSX.Element {
   const [newTask, setNewTask] = useState<string>("");
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const taskInput = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: FormElement) => {
     e.preventDefault();
     addTask(newTask);
-    console.log(tasks);
+    //console.log(tasks);
     setNewTask("");
+    taskInput.current?.focus();
   };
 
   //agregando una nueva tarea
@@ -47,6 +49,7 @@ function App(): JSX.Element {
             <div className="card-body">
               <form onSubmit={handleSubmit}>
                 <input
+                  ref={taskInput}
                   type="text"
                   onChange={(e) => setNewTask(e.target.value)}
                   value={newTask}
